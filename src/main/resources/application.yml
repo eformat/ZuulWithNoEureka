@@ -11,9 +11,22 @@ endpoints:
 
 zuul:
   routes:
-    stores: /stores/**
-    customers: /customers/**
-    zuulserver: /self/**
+    stores:
+      path: /stores/**
+      serviceId: stores
+      url: http://localhost:9997
+    customers:
+      path: /customers/**
+      serviceId: customers
+      url: http://localhost:9999
+    zuulserver:
+      path: /self/**
+      serviceId: zuulserver
+      url: http://localhost:8765/
+
+ribbon:
+  eureka:
+    enabled: false
 
 server:
   port: 8765
