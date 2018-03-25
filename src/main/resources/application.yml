@@ -9,20 +9,60 @@ endpoints:
   health:
     sensitive: false
 
+hystrix:
+  command:
+    stores:
+      circuitBreaker:
+        requestVolumeThreshold: 10
+        sleepWindowInMilliseconds: 10000
+      execution:
+        timeout:
+          enable: false
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+    customers:
+      circuitBreaker:
+        requestVolumeThreshold: 10
+        sleepWindowInMilliseconds: 10000
+      execution:
+        timeout:
+          enable: false
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+    zuulserver:
+      circuitBreaker:
+        requestVolumeThreshold: 10
+        sleepWindowInMilliseconds: 10000
+      execution:
+        timeout:
+          enable: false
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+stores:
+  ribbon:
+    listOfServers: http://localhost:9995/, http://localhost:9997/
+customers:
+  ribbon:
+    listOfServers: http://localhost:9999/
+zuulserver:
+  ribbon:
+    listOfServers: http://localhost:8765/
+
 zuul:
   routes:
     stores:
       path: /stores/**
       serviceId: stores
-      url: http://localhost:9997
     customers:
       path: /customers/**
       serviceId: customers
-      url: http://localhost:9999
     zuulserver:
       path: /self/**
       serviceId: zuulserver
-      url: http://localhost:8765/
 
 ribbon:
   eureka:

@@ -1,7 +1,6 @@
 package zuulserver;
 
 import org.springframework.cloud.netflix.zuul.filters.route.FallbackProvider;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 
 public class MyFallbackProvider implements FallbackProvider {
@@ -10,7 +9,7 @@ public class MyFallbackProvider implements FallbackProvider {
 
     @Override
     public String getRoute() {
-        return "zuulserver";
+        return "*";
     }
 
     @Override
